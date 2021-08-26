@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=30mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\section*{Notes - Week 1 - August 25, 2021}
+
+\begin{itemize}
+
+    \item An \definition{algorithm} is a finite step by step process to solve a problem
+    \begin{itemize}
+        \item \definition{finite} it must terminate given \textbf{any} input
+    \end{itemize}
+
+    \item What is the Analysis of Algorithms?
+    \begin{itemize}
+        \item How long does it take to run?
+        \item How much space does it use?
+    \end{itemize}
+
+    \item Most research is on the time it takes an algorithm to run. Memory is "cheap".
+
+    \item Typically concerned with large data sets.
+    \begin{itemize}
+        \item Most algorithms will seem fast in small data sets
+        \item Large data sets simulate real situations
+    \end{itemize}
+
+    \item We always analyze an algorithm before we write it. \definition{Analysis}
+
+    \item Trying it out is referred to as \definition{Measuring}.
+
+    \item \definition{Big O Notation} refers to the time complexity of a statement, notated as $O(x)$ where $x$ is the amount of statements the algorithm executes, based on the variable $n$.
+    \begin{itemize}
+        \item $O(n^2)$
+        \item $O(log(n))$
+        \item $O(1)$
+        \item etc 
+    \end{itemize}
+
+\end{itemize}
+
+\subsection*{The Selection Problem}
+
+\begin{itemize}
+
+    \item We have $n$ numbers, in an array, no guarantee of sorting. 
+
+    \item We want the $k^t^h$ largest number.
+
+    \item Algorithm $(0)$: $O(n^2)$ complexity
+
+    \item Algorithm $(1)$: $O(nlog(n))$ complexity
+
+    \item New Algorithm:
+    \begin{enumerate}
+        \item Read the first $k$ numbers into a separate array
+        \item Sort the new array
+        \item Read the rest of the numbers. If they're smaller, replace the largest number in the array with an insertion.
+    \end{enumerate}
+
+    \item Is this new algorithm faster?
+    \begin{itemize}
+        \item Some of the time
+        \item depends on how large $k$ is relative to $n$
+    \end{itemize}
+
+    \item Example: Find the $5^t^h$ largest number in an array of size $1,000,000$
+    \begin{itemize}
+        \item $n = 1,000,000$
+        \item $k = 5$
+        \item Using $nlog(n)$ sort, it's approximately $20,000,000$ statements
+        \item Using new algorithm, it's about $5log(5) + 500,000 + 5(500,000) ~= 3,000,000$ statements
+    \end{itemize}
+
+    \item As $k$ approaches $n$, the new algorithm approaches the original time complexity of $nlog(n)$.
+
+\end{itemize}
+
+
+\end{document}
+
+
