@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\begin{itemize}
+
+    \item Read Chapters 7 and 8 for Week 3. Quiz in Week 3.
+
+    \item What governs how fast an algorithm can run?
+    \begin{itemize}
+        \item The complexity of the problem; a problem has a theoretical best solution
+        \item The efficiency of the algorithm; an algorithm can give a close enough solution in a fraction of the time
+    \end{itemize}
+
+    \item Sometimes writing a program that always guesses the correct solution is not always good enough.
+    \begin{itemize}
+        \item Time complexity; a program taking too long for its answer; keep in mind timescales
+    \end{itemize}
+
+\end{itemize}
+
+\section*{Properites of Exponents}
+
+\begin{itemize}
+
+    \item $x^a * x^b = x^{a+b}$
+    \item $(x^a)^b = x^{ab}$
+    \item $x^a / x^b = x^{a-b}$
+
+\end{itemize}
+
+\section*{Properties of Logarithms}
+\begin{itemize}
+
+    \item $x^a = b$ iff $log_x b = a$
+
+    \item $log_a b = log_c b / log_c a$ if $a, b, c > 0, a \neq 0$
+    \begin{itemize}
+        \item Let $x = log_c b$, $y = log_c a$, $z = log_a b$
+        \item $b = c^x, b=a^z \rightarrow b = c^x = a^z$
+        \item $a = c^y$
+        \item $b = c^x = c^{yz}$
+        \item $x = yz \rightarrow z = x/y$
+    \end{itemize}
+
+    \item $logab = loga + logb$
+    \begin{itemize}
+        \item Let $x = log_2 a, y = log_2 b, z = log_2 ab$ if $a, b > 0$
+        \item $2^x = a, 2^y = b, 2^z = ab$
+        \item $2^x * 2^y = 2^z$
+        \item $2^{x+y} = 2^z$
+        \item $x + y = z$
+    \end{itemize}
+
+    \item $log_2 (a/b) = log_2 a - log_2 b$ if $a, b > 0$
+    \begin{itemize}
+        \item Let $x = log_2 a, y = log_2 b, z = log_2 (a/b)$
+        \item $2^x = a, 2^y = b, 2^z = a / b$
+        \item $2^x / 2^y = 2^z$
+        \item $x-y = z$
+    \end{itemize}
+
+\end{itemize}
+
+\pagebreak
+
+\section*{Disproof}
+\begin{itemize}
+    \item Only need to find one counter example
+    \item Example: $n! < n^2 + n^5$ \\
+    \begin{tabular}{l l l}
+        Pick $n=9$ & & \\
+        $9! = 362880$ & $9^2 = 81$ & $9^5 = 59130$ \\
+        $362880 < 81 + 59130$ & FALSE! &
+    \end{tabular}
+\end{itemize}
+
+\section*{Proof by Induction}
+\begin{itemize}
+    \item Use proof by Induction for discrete types only.
+    \item Happens in 3 steps:
+    \begin{enumerate}
+        \item Start with a (very small) base case.
+        \item Inductive Hypothesis: ``Since we showed a base case in Step 1, let's assume it holds true for values through $k$''
+        \item Show that if the Hypothesis works for value $k$, the Hypothesis holds for $k+1$
+    \end{enumerate}
+\end{itemize}
+
+\subsection*{Example of Induction}
+
+\[ \sum_{i=1}^{n} i = \frac{n(n+1)}{2} \]
+
+\begin{enumerate}
+    \item Let $n=1 \rightarrow 1 = 1$
+    \item Assume the property is true for $1, 2, \ldots, k$
+    \item Show if true for $k$, then true for $k+1$
+    \\
+    \begin{tabular}{l l l}
+        $\sum_{i=1}^{k+1} i$ & $=$ & $\sum_{i=1}^{k} + k + 1$ \\
+        & $=$ & $\frac{k(k+1)}{2} + k + 1$ \\
+        & $=$ & $\frac{k(k+1)}{2} + \frac{2(k+1)}{2}$ \\
+        & $=$ & $\frac{k(k+1) + 2(k+1)}{2}$ \\
+        & $=$ & $\frac{(k+1)(k+2)}{2}$ \\
+        & $=$ & $\frac{(k+1)(k+1+1)}{2}$ \\
+    \end{tabular}
+
+
+\end{enumerate}
+
+\pagebreak
+
+\subsection*{Example 2 of Induction}
+
+\[ \sum_{i=1}^{n} i(i+1) = \frac{n(n+1)(n+2)}{3} \]
+
+\begin{enumerate}
+    \item Let $n=1 \rightarrow 2 = 2$
+    \item Assume the property is true for $1, 2, \ldots, k$
+    \item Show if true for $k$, then true for $k+1$
+    \\
+    \begin{tabular}{l l l}
+        $\sum_{i=1}^{k+1} i(i+1)$ & $=$ & $\sum_{i=1}^{k} i(i+1) + (k+1)(k+2)$ \\
+        & $=$ & $\frac{k(k+1)(k+2)}{3} + (k+1)(k+2)$ \\
+        & $=$ & $\frac{k(k+1)(k+2)}{3} + \frac{3(k+1)(k+2)}{3}$ \\
+        & $=$ & $\frac{k(k+1)(k+2) + 3(k+1)(k+2)}{3}$ \\
+        & $=$ & $\frac{(k+1)(k+2)(k+3)}{3}$ \\
+        & $=$ & $\frac{(k+1)(k+1+1)(k+1+2)}{3}$ \\
+    \end{tabular}
+
+\end{enumerate}
+
+\subsection*{Example 3 of Induction}
+
+Fibonnaci Numbers $\rightarrow F_0 = 1, F_1 = 1, \ldots, (F_i = F_{i-1} + F_{i-2})$
+
+Prove that $F_i < ({\frac{5}{3}})^i$, for $i \geq 1$
+
+\begin{enumerate}
+
+    \item $F_1 = 1 < (\frac{5}{3})^1$
+    \item Assume this is true for $1, \ldots, k$
+    \item Show if true for $k$, then true for $k+1$
+    \\
+    \begin{tabular}{l l l l l}
+        $F_{k+1}$ & $=$ & $F_k + F_{k-1}$ && \\
+        $F_{k+1}$ & $<$ & $(\frac{5}{3})^k + (\frac{5}{3})^{k-1}$ && \\
+        $F_{k+1}$ & $<$ & $(\frac{3}{5})(\frac{5}{3})^{k+1} + (\frac{3}{5})^2(\frac{5}{3})^{k+1}$ && \\
+        $F_{k+1}$ & $<$ & $(\frac{5}{3})^{k+1} * ((\frac{3}{5})^2+(\frac{3}{5}))$ && \\
+        $F_{k+1}$ & $<$ & $(\frac{5}{3})^{k+1} * (\frac{15}{25} + \frac{9}{25})$ && \\
+        $F_{k+1}$ & $<$ & $(\frac{5}{3})^{k+1} * \frac{24}{25}$ & $<$ & $({\frac{5}{3}})^{k+1}$ \\
+    \end{tabular}
+
+\end{enumerate}
+
+\end{document}
