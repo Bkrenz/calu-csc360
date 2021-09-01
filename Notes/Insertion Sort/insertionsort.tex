@@ -42,7 +42,7 @@
     \begin{algorithmic}
         \For{$j = 2$ to $A.Length$}
             \State $key = A[j]$ 
-            \\ \Comment Insert $A[j]$ into the sorta sequence $A[1 \ldots j-1]$.
+            \\ \Comment Insert $A[j]$ into the sorted sequence $A[1 \ldots j-1]$.
             \State $i = j-1$
             \While{$i > 0$ and $A[i] > key$}
                 \State $A[i+1] = A[i]$
