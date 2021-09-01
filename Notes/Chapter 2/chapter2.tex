@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+Introduction to Algorithms - 3rd Edition - Thomas Cormen et.al.
+
+\section*{Chapter 2}
+
+\begin{itemize}
+
+  \item The \definition{loop invariant} is the statement defining the properties of a loop at each iteration. It must satisfy three things:
+  \begin{description}
+      \item[Initialization] It is true prior to the first iteration of the loop.
+      \item[Maintenance] If it is true before an iteration of the loop, it remains true before the next iteration.
+      \item[Termination] When the loop terminates, the invariant gives us a useful property that helps show that the algorithm is correct.
+  \end{description}
+
+\end{itemize}
+
+\end{document}

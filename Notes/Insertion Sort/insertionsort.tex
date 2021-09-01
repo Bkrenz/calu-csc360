@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\begin{center}
+    \section*{Insertion Sort}
+\end{center}
+
+\begin{algorithm}
+    \caption{Insertion-Sort($A$)}
+    \begin{algorithmic}
+        \For{$j = 2$ to $A.Length$}
+            \State $key = A[j]$ 
+            \\ \Comment Insert $A[j]$ into the sorta sequence $A[1 \ldots j-1]$.
+            \State $i = j-1$
+            \While{$i > 0$ and $A[i] > key$}
+                \State $A[i+1] = A[i]$
+                \State $i = i - 1$
+            \EndWhile
+            \State $A[i+1] = key$
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{description}
+    \item[Loop Invariant:] At the start of each iteration of the \textbf{for} loop, the subarray $A[1 \ldots j-1 ]$ consists of the elements original in $A[1 \ldots j-1]$, but in sorted order.
+
+    \item[Initialization:] We start by showing that the loop invariant holds before the first loop iteration, when $j=2$. The subarray $A[1 \ldots j-1]$, therefore, consists of just the single element $A[1]$, which is in fact the original element in $A[1]$. Moreover, this subarray is sorted (trivially), which shows that the loop invariant holds prior to the first iteration of the loop.
+
+    \item[Maintenance:] Informally, the body of the \textbf{for} loop works by moving $A[j-1], A[j-2], A[j-3], \ldots$ by one position to the right until it ifnds the proper position for $A[j]$. The subarray $A[1 ldots j-1]$ then consists of the elements originally in $A[1 \ldots j]$, but in sorted order. Incrementing $j$ for the next iteration of the \textbf{for} loop then preserves the loop iteration.
+    \footnote{A more formal treatment of the Maintenance property would require us to state and show a loop invariant for the \textbf{while} loop.}
+
+    \item[Termination:] The condition causing the \textbf{for} loop to terminate is that $j > A.length = n$. Because each loop iteration increases $j$ by $1$, we must have $j = n + 1$ at that time. Substituting $n + 1$ for $j$ in the wording of loop invariant, we hae that the subarray $A[1 \ldots n]$ consists of the elements originally in $A[1 \ldots n]$,
+    but in sorted order. Observing that the subarray $A[1 \ldots n]$ is the entire array, we conclude that the entire array is sorted.
+\end{description}
+
+\end{document}

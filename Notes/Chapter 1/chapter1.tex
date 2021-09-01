@@ -1,0 +1,70 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+Introduction to Algorithms - 3rd Edition - Thomas Cormen et.al.
+
+\section*{Chapter 1}
+
+\begin{itemize}
+
+    \item An \definition{algorithm} is any well-defined computational procedure that takes some value, or set of values, as \definition{input} and produces some value, or set of values, as \definition{output}.
+
+    \item An algorithm is a tool for solving a well-specified \definition{computational problem}.
+    \begin{itemize}
+        \item The statement of the problem gives in general terms the desired input/output relationship.
+        \item The algorithm describes a specific computational procedure for achieving that relationship.
+    \end{itemize}
+
+    \item \definition{The Sorting Problem}
+    \begin{description}
+        \item Input: A sequence of $n$ numbers $\langle a_1, a_2, \ldots, a_n \rangle$.
+        \item Output: A permutation (reordering) $\langle a'_1, a'_2, \ldots, a'_n \rangle$ of the input sequence such that $a'_1 \leq a'_2 \leq \cdots \leq a'_n$.
+    \end{description}
+
+    \item A given input sequence is called an \definition{instance of a problem}.
+
+    \item An algorithm is said to be \definition{correct} if, for every input instance, it halts with the correct output; an algorithm \definition{solves} the given computational problem.
+
+    \item Incorrect algorithms can be useful, if the error rate is controlled
+
+    \item What kinds of problems are solved by algorithms?
+    \begin{itemize}
+        \item Human Genome Project (determining sequences, storage, data analysis)
+        \item The Internet (finding efficient routes, search engines)
+        \item Ecommerce
+        \item Manufacturing (allocating scarce resources in most efficient way)
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
