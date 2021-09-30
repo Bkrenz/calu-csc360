@@ -1,0 +1,191 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\section*{Notes Week 4}
+
+\begin{itemize}
+
+    \item Exam in Week 5 - Last Names A-M 6:00pm, N-Y 6:45pm
+    
+    \item Read Chapter 4 for Week 6 - after exam
+
+\end{itemize}
+
+\section*{Quiz 1 Review - Proof by Induction}
+
+Prove $n < 2n$ for all $n \geq 1$.
+
+\begin{enumerate}
+
+    \item Base Case: $n=1$ \\ \\
+    \begin{tabular}{l}
+        $1 < 2\times(1)$ \\ 
+        $1 < 2$
+    \end{tabular}
+
+    \item Assume this is true for $1, \ldots, k$.
+
+    \item If true for $k$, then it is true for $k+1$ \\ \\ 
+    \begin{tabular}{l l}
+        $k < 2k$ & Independent Hypothesis \\
+        $k + 1 < 2k + 1$ & Add 1 to both sides \\
+        $k + 1 < 2k + 1 + 1$ & As this is an equality, can add $1$ to the larger side and hold true \\
+        $k + 1 < 2k + 2$ & Simplify \\
+        $k + 1 < 2(k + 1)$ & Factor out the two \\
+    \end{tabular}
+
+\end{enumerate}
+
+\pagebreak
+
+\section*{Example - Proof by Induction}
+
+Prove that path of length $n$ has $n-1$ edges.
+
+\begin{enumerate}
+
+    \item Base Case: $n=2$ \\ \\
+    \begin{tabular}{l}
+        
+    \end{tabular}
+
+    \item Assume this is true for $1, \ldots, k$.
+
+    \item If true for $k$, then it is true for $k+1$ \\ \\ 
+    \begin{tabular}{l l}
+        
+    \end{tabular}
+
+\end{enumerate}
+
+\pagebreak
+
+\section*{Proof By Contradiction}
+
+\begin{itemize}
+
+    \item Prove something by contradicting the negated hypothesis
+    
+    \item ``Not everyone that is exactly six feet tall has red hair.''
+
+    \item The Steps:
+    \begin{enumerate}
+
+        \item Assume that the hypothesis is false
+
+        \item Show the assumption leads to a contradiction
+
+        \item Recognize that assuming step 1 is false leads to a contradiction, implying the hypothesis is true
+
+    \end{enumerate}
+
+
+\end{itemize}
+
+\section*{Example - Proof by Contradiction}
+
+Prove if $n$ is an integer and $n^2$ is even, then $n$ is even.
+
+Suppose by way of contradiction that: 
+\begin{itemize}
+    \item $n$ is an integer
+    \item $n^2$ is even 
+    \item $n$ is odd
+    \begin{itemize}
+        \item[$\rightarrow$] $n = 2k+1$ for some integer $k$ (the definition of an odd number)
+    \end{itemize}
+    \item $n^2 = (2k+1)^2 = 4k^2 + 4k + 1$
+    \item $2(2k^2+2k) + 1$ is odd
+    \item $n^2$ is odd
+\end{itemize}
+
+Contradiction: $n^2$ cannot be both even and odd.
+
+\section*{Example - Proof by Contradiction}
+
+Prove: for every $n$, if $n > 2$ and $n$ is prime, then $n$ is odd.
+
+Suppose by way of contradiction that:
+\begin{itemize}
+    \item $n>2$
+    \item $n$ is prime
+    \item $n$ is even
+    \item $n = 2k$ for some integer $k$ (definition of an even integer) 
+    \item $k != 1$
+    \item $n = 2(k)$, $k>1$
+    \item $n \& (whole number > 1)$ is composite
+\end{itemize}
+
+Contradiction: $n$ cannot be both composite and prime
+
+
+\section*{Example - Proof by Contradiction}
+
+Prove: No integers $a$ \& $b$ exist for which $24a + 12b = 1$.
+
+Suppose by way of contradiction:
+\begin{itemize}
+    \item $a$ is an integer
+    \item $b$ is an integer
+    \item $24a + 12b = 1$
+    \item Divide by 12, $2a + b = \frac{1}{12}$
+\end{itemize}
+
+Contradiction: A whole number multiplied by $2$ summed with another whole number cannnot be a fraction.
+
+
+\pagebreak
+
+\section*{Notation notes}
+
+\begin{itemize}
+    \item $B = O(A) \rightarrow$ B is upper bounded by A
+    \item $T(n) = O(f(n))$ if there are positive constants $c$ \& $n_0$ such that $T(n) \leq cf(n)$ when $n \geq n_0$
+    \item $A = \Omega(B) \rightarrow$ A is lower bounded by B
+    \item $T(n) = \Omega(f(n))$ if there are positive constants $c$ \& $n_0$ such that $T(n) \geq cf(n)$ when $n \geq n_0$
+    \item $\omega(n)$ instead of $\Omega(n)$ if not possible to be equal
+    \item $T(n) = \mu(f(n))$ if there are positive constants $c$ \& $n_0$ such that $T(n) > cf(n)$ when $n \geq n_0$
+    \item Use the lower case versions when bounded but not able to equal. Use upper case when bounded and can be equal, based on definitions above.
+    \item $T(n) = \Theta(f(n))$ if and only if $T(n) = O(f(n))$ and $T(n) = \Omega(f(n))$
+\end{itemize}
+
+Given $f(n) = 3n^2$ and $g(n) = 5n^2$, give all true statements.
+\begin{itemize}
+    \item $f(n) = O(g(n))$
+    \item $g(g) = \Omega(f(n))$
+    \item etc.
+\end{itemize}
+
+\end{document}

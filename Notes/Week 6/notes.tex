@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+
+\section*{Notes Week 6}
+
+\begin{itemize}
+
+    \item Read Chapters 22, Chapter 9 for Week 7
+
+\end{itemize}
+
+
+\subsection*{Rules for Big O Notation (Upper Bounds)}
+
+\begin{itemize}
+
+    \item \textbf{Transitivity}: If $f = O(g)$ and $g = O(h)$ then $f = O(h)$
+
+    \item \textbf{Sums}: If $f_1 = O(g_1)$ and $f_2 = O(g_2)$ then $f_1(n) + f_2(n) = O( max(f, g) )$
+    
+    \item \textbf{Products}: If $f_1 = O(g_1)$ and $f_2 = O(g_2)$ then $f_1 \times f_2 = O(g_1 \times g_2)$
+
+    \item If the largest term is a polynomial of degree $k$, then the whole thing is $\Theta(n^k)$
+
+    \item $log^kn = O(n) \rightarrow$ a log raised to any constant power is still just $O(n)$
+
+    \item $\lim{n\to\infty} \frac{f(n)}{g(n)} \rightarrow$ If the limit is:
+    \begin{itemize}
+        \item \textbf{0} $\rightarrow f=o(g) \rightarrow g(n) > f(n) \rightarrow g$ dominates $f$
+        \item \textbf{$c \neq 0$} $\rightarrow f = \Theta(g(n)) \rightarrow g(n) = \Theta(f(n))$
+        \item \textbf{$\infty$} $\rightarrow g(n) = o(f(n))$
+    \end{itemize}
+
+    \item Example: $f(n) = \frac{n}{log(n), g(n) = n^{\frac{1}{2}}log^2n}$
+
+\end{itemize}
+
+
+\subsection*{Rules for Big $\Omega$ Notation (Lower Bounding)}
+
+\begin{itemize}
+
+    \item \textbf{Comparison-based Solution} $\omega(nlogn) \rightarrow$ it's been proven that comparison-based sorting cannot be faster
+    
+    \item Some problems are $\Omega(2^n) \rightarrow$ Super slow
+
+\end{itemize}
+
+
+\subsection*{Quick Maths}
+
+\begin{itemize}
+
+    \item $b^{log_ba} = a$
+
+    \item $a^{log_bn} = n^{log_ba}$
+
+    \item Any exponential function dominates any polynomial
+    \begin{itemize}
+        \item Exponential function $\rightarrow 2^n \rightarrow$ variable in the exponent
+        \item Polynomial function $\rightarrow n^{234} \rightarrow$ exponent is a constant
+    \end{itemize}
+
+    \item $\sum(ca_k + b_k) = c\sum(a_k) + \sum(b_k)$
+
+\end{itemize}
+
+
+\section*{Recurrences - Recurrence Relations}
+
+\begin{itemize}
+
+    \item A \definition{Recurrence} is used when dealing with recursion. 
+    
+    \item Merge Sort: \\
+    
+    \begin{tabular}{l c c}
+        \textbf{Case} & \textbf{Formula} & \textbf{Big O} \\
+        base case & $T(n) = \Theta(1)$ & $\Theta(1)$ \\
+        not base case & $2T(\frac{n}{2}) + \Theta(n)$ & ? 
+    \end{tabular}
+
+    \item How does $2T(\frac{n}{2})$ explain the recurrence of merge sort?
+    \begin{itemize}
+        \item Each division splits the array in half
+        \item There are two pieces in each call, one for each half
+        \item So the array is split in half, and each is operated on recursively
+    \end{itemize}
+
+    \item So what is the $O($merge-sort$)$ 
+    \begin{itemize}
+
+        \item $T(n) = 2T(\frac{n}{2}) + n \rightarrow$ Merge Sort Recurrence
+        \item Solve using iteration method: ``Unfold the recurrence''
+        \begin{enumerate}
+
+            \item If there's a constant, write out that constant with square brackets empty to indicate something needs done
+            \begin{equation}
+                2[\ \ \ ] + n
+            \end{equation}
+
+            \item Plug the $\frac{n}{2}$ back into the original
+            \begin{equation}
+                2[ 2T(\frac{n}{4}) + \frac{n}{2} ] + n
+            \end{equation}
+
+            \item Multiply it out
+            \begin{equation*}
+                4T(\frac{n}{4}) + 2n
+            \end{equation*}
+
+            \item Take the previous iteration (2) and repeat
+            \begin{equation}
+                4[ 2T(\frac{n}{8}) + \frac{n}{4} ] + 2n
+            \end{equation}
+
+            \item Simplify
+            \begin{equation*}
+                8T(\frac{n}{8}) + 3n
+            \end{equation*}
+
+            \item Repeat the process until you can spot the general case. The next iteration would be
+            \begin{equation}
+                16T(\frac{n}{16}) + 4n
+            \end{equation}
+
+            \item Write down the general case in terms of $k$
+            \begin{equation*}
+                2^k(\frac{n}{2^k}) + kn
+            \end{equation*}
+
+            \item How many times does the recurrence occur? $k = log_2n$
+
+            \item Plug in k
+            \begin{equation*}
+                2^{log_2n} T(\frac{n}{2^{log_2n}}) + nlog_2n
+            \end{equation*}
+
+            \item Simplify
+            \begin{equation*}
+                n T(1) + nlog_2n = O(nlog_2n)
+            \end{equation*}
+
+        \end{enumerate}
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
