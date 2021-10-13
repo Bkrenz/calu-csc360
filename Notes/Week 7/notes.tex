@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+
+\section*{Notes Week 7}
+
+\subsection*{Examples: Recurrences}
+
+\begin{itemize}
+
+    \item Recurrence: $T(n) = 2T(n-1) + 1 \rightarrow O(2^n) \rightarrow$ Fibonacci Numbers
+
+    \item Recurrence: $T(n) = T(n-2) + n \rightarrow O(b^2) \rightarrow$ Fun, made up problem
+
+\end{itemize}
+
+\subsection*{Solving Recurrences by the Master Method}
+If the recurrence takes the form: 
+
+\begin{equation*}
+    T(n) = aT(\frac{n}{b}) + \Theta(n^k)
+\end{equation*}    
+
+where $a \geq 1$ and $b > 1$ then
+
+\begin{center}
+    \begin{tabular}{r l}
+        $O(n^k)$ & if $a < b^k$ \\
+        $O(n^klog_2n)$ & if $a == b^k$ \\
+        $O(n^{log_ba})$ & if $ a > b^k$
+    \end{tabular}
+\end{center}
+
+\subsubsection*{Examples}
+
+\begin{itemize}
+    \item Recurrence: $T(n) = 9T(\frac{n}{3}) + n$ \\
+    $a = 9, b = 3, k = 1 \rightarrow$ Since $a > b^k$, $O(n^{log_39}) = O(n^2)$
+
+    \item Recurrence: $2T(\frac{n}{2}) + n$
+
+    \item Recurrence: $T(\frac{n}{2}) + 1$
+
+\end{itemize}
+
+\subsection*{Sorting in Linear Time}
+
+\begin{itemize}
+
+    \item Radix sort, when the number of elements far outweighs the digits
+    \item Counting sort, when number range is small and only need to count the occurrences
+
+\end{itemize}
+
+\subsubsection*{Good test question:}
+When is Radix sort better than merge sort?
+\begin{itemize}
+    \item Radix Sort $ = O(n \times p)$
+    \item Merge Sort $ = O(nlog_2n)$
+    \item Radix is faster when $p < log_2n$
+\end{itemize}
+
+\subsection*{Graphs}
+
+\begin{itemize}
+
+    \item \definition{Graph}: a set that contains a set of vertices and a set of edges, notated $G = (V,E)$
+    \begin{itemize}
+        \item $V = $ set of vertices
+        \item $E = $ set of edges
+    \end{itemize}
+
+    \item \definition{Degree of a Vertex}: number of edges touching a vertex
+    \begin{itemize}
+        \item \definition{In-Degree}: number of edges traveling into a vertex
+        \item \definition{Out-Degree}: numbers of edges traveling out of a vertex
+        \item Degrees = In-Degree + Out-Degree
+    \end{itemize}
+
+    \item A graph is \definition{Connected} if you can travel from any vertex to any other vertex.
+
+    \item A graph is \definition{Disjoint} if it is not Connected.
+
+    \item Graphs are equivalent if their vertex and edge sets are equivalent
+
+    \item A \definition{Complete Graph} is a graph where all possible edges exist.
+
+    \item A \definition{Planar Graph} is a graph that you can draw in two dimensions such that no edges cross.
+
+    \item Edges and paths can have \definition{weight}, which would be application specific
+
+\end{itemize}
+
+
+\end{document}
