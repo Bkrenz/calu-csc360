@@ -1,5 +1,7 @@
 ## Ignored Folders
 Provided
+.vscode
+build
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
