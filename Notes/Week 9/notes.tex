@@ -1,0 +1,103 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\section*{Notes Week 9}
+
+\begin{itemize}
+
+    \item Exam Week 10 - B-M 6:45pm, N-Y 6:00pm
+
+\end{itemize}
+
+\section*{Assignment - Minimum Dominating Set of a Graph}
+
+\begin{itemize}
+
+	\item Big ole Assignment
+	\begin{itemize}
+		\item Exploring $2^n$ runtime complexity
+		\item Writing a paper that:
+		\begin{enumerate}
+			\item The problem
+			\item The data
+			\item The algorithm
+		\end{enumerate}
+	\end{itemize}
+
+\end{itemize}
+
+\section*{Minimum Domating Set of a Graph}
+
+\begin{itemize}
+
+	\item The nodes of a dominating set may not be unique
+	\item The size of the set of nodes \textit{will} be unique
+
+	\item \definition{Dominating Set of a Graph}: a subset of the vertices such that all nodes in the graph are either in the dominating set or have a neighbor that is in the dominating set.
+
+	\item The best \textit{known} solution to this problem is to test every posssible combination of verticecs, aka \textbf{Brute Force}
+
+	\item Use an array that is one larger than the number of nodes
+
+	\item Using binaries numbers, can represent whether a node appears in the set using $0$s or $1$s.
+
+	\item For each number 0 to $2^n$, pass the number to a function to determine if that number represents a dominating set
+
+	\item \definition{Approximation Algorithm}: an algorithm we design to run quickly trying to get an answer that's close to the correct answer
+
+\end{itemize}
+
+\section*{Complexity Classes}
+
+\begin{itemize}
+
+	\item \definition{P}: the set of all Problems that can be solved in polynomial times - constant exponents
+
+	\item \definition{NP}: the set of all problems whose solutions can be \textit{verified} in polynomial time
+
+	\item $\textbf{P} \in \textbf{NP}$
+
+	\item \definition{NP-Complete}: The hardest problems in \textbf{NP}.
+
+	\item \definition{SAT} - The Satisfiability Problem. The original NP-Complete problem. 
+	
+	\item For \textbf{NP-Complete}: Not solved, but strongly believed to be, that these problems are not solvable in polynomial time.
+
+	\item 
+
+\end{itemize}
+
+\end{document}
