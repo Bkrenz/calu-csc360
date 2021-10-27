@@ -13,8 +13,11 @@
 #include <math.h>
 #include <vector>
 
-const int SIZE = 8;
+const int SIZE = 30;
 const float DENSITY = 30;
+
+
+int getNextCombo(int combo);
 
 int conversion(int array[], int len) {
     int output = 0;
@@ -51,50 +54,31 @@ int main() {
         }
     }
 
-    for (int i = 0; i < SIZE; i++)
-    {
-        for (int j = 0; j < SIZE; j++)
-            std::cout << adjacencyMatrix[i][j] << " ";
-        std::cout << std::endl;
-    }
-
+    // Convert an array to an integer
     for (int i = 0; i < SIZE; i++)
         numbers[i] = conversion(adjacencyMatrix[i], SIZE);
 
-
-
-    for (int i = 0; i < SIZE; i++)
-    {
-        std::cout << numbers[i] << std::endl;
-    }
-
     // Find the Min Dominating Set
-    int p = pow(2, SIZE - 1);
-    time(&start);
-    int neighbors;
-    std::vector<int> solutions;
-    for (int i = 0; i < p; i++ )
+    int p = pow(2, SIZE);   // The amount of combinations
+    time(&start);           // Start the timer
+    int neighbors, solution;
+    for (solution = 0; solution < p; solution++)
     {
         neighbors = 0;
         
         for (int j = 0; j < SIZE; j++)
-        {
-            if (i & (1 << j))
+            if ((solution & (1 << j)) == (1 << j))
                 neighbors = neighbors | numbers[j];
-        }
 
-        if (neighbors == p - 1)
-            solutions.push_back(i);
+        if (neighbors == (p - 1))
+            break; // Found a solution, but we're ending after finding the first solution, not necessarily the best solution
     }
-    time(&finish);
+    time(&finish);          // Finish the timer
 
     // Print out the vector
-    std::cout << "solutions = { ";
-    for (int n : solutions) {
-        std::cout << n << ", ";
-    }
-    std::cout << "}; \n";
+    std::cout << "solution = " << solution << std::endl;
 
+    // Compute the amount of time required
     std::cout << "Time required = " << difftime(finish, start) << " seconds";
 
     return 0;

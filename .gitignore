@@ -2,6 +2,7 @@
 Provided
 .vscode
 build
+*.exe
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
