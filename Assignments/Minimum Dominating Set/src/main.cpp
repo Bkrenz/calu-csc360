@@ -13,11 +13,8 @@
 #include <math.h>
 #include <vector>
 
-const int SIZE = 30;
+const int SIZE = 24;
 const float DENSITY = 30;
-
-
-int getNextCombo(int combo);
 
 int conversion(int array[], int len) {
     int output = 0;
@@ -61,22 +58,29 @@ int main() {
     // Find the Min Dominating Set
     int p = pow(2, SIZE);   // The amount of combinations
     time(&start);           // Start the timer
-    int neighbors, solution;
-    for (solution = 0; solution < p; solution++)
+    int neighbors, currentSolution, currentCount, bestCount = SIZE, bestSolution = p-1;
+    for (currentSolution = 0; currentSolution < p; currentSolution++)
     {
         neighbors = 0;
+        currentCount = 0;
         
         for (int j = 0; j < SIZE; j++)
-            if ((solution & (1 << j)) == (1 << j))
+            if ((currentSolution & (1 << j)) == (1 << j))
+            {
                 neighbors = neighbors | numbers[j];
+                currentCount++;
+            }
 
-        if (neighbors == (p - 1))
-            break; // Found a solution, but we're ending after finding the first solution, not necessarily the best solution
+        if (neighbors == (p - 1) && currentCount < bestCount)
+        {
+            bestSolution = currentSolution;
+            bestCount = currentCount;
+        }
     }
     time(&finish);          // Finish the timer
 
     // Print out the vector
-    std::cout << "solution = " << solution << std::endl;
+    std::cout << "Best Solution = " << bestSolution << std::endl;
 
     // Compute the amount of time required
     std::cout << "Time required = " << difftime(finish, start) << " seconds";
