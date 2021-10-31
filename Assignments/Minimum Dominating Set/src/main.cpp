@@ -25,7 +25,6 @@ int main() {
 
     // Create an Undirected Graph
     Graph graph = Graph(SIZE, DENSITY);
-    graph.generateRandomGraph();
 
     // Print out the graph
     std::cout << graph.toString() << std::endl;
@@ -51,8 +50,8 @@ int main() {
     int* approximateSolution = graph.findApproximateSolution();
     time(&finish);          // Finish the timer
 
-    // Output the minimum set
-    std::cout << "The minimum dominating is: \n{";
+    // Output the approximate set
+    std::cout << "The approximate solution is: \n{";
     for (int i = 0; i < SIZE - 1; i++)
     {
         std::cout << std::to_string(approximateSolution[i]) << ", ";

@@ -21,8 +21,6 @@ class Graph {
 
         std::string toString();
 
-        void generateRandomGraph();
-
         int* findMinimumSolution();
         int* findApproximateSolution();
     
@@ -30,6 +28,8 @@ class Graph {
         int size;
         int density;
         int** adjacencyMatrix;
+
+        void generateRandomGraph();
 
 };
 

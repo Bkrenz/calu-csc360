@@ -23,6 +23,7 @@ Graph::Graph()
 {
     this->size = SIZE;
     this->density = DENSITY;
+    this->generateRandomGraph();
 }
 
 
@@ -30,6 +31,7 @@ Graph::Graph(const int pSize, const int pDensity)
 {
     this->size = pSize;
     this->density = pDensity;
+    this->generateRandomGraph();
 }
 
 Graph::~Graph()
