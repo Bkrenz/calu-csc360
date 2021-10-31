@@ -34,6 +34,7 @@ Graph::Graph(const int pSize, const int pDensity)
     this->generateRandomGraph();
 }
 
+
 Graph::~Graph()
 {
     for (int i = 0; i < this->size; i++)
@@ -70,6 +71,8 @@ void Graph::generateRandomGraph()
 
 int* Graph::findMinimumSolution()
 {
+
+
     return 0;
 }
 
