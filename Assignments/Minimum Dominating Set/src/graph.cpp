@@ -14,6 +14,7 @@
 #include <string>
 #include <math.h>
 #include <stdlib.h>
+#include <set>
 
 const int SIZE = 16;
 const int DENSITY = 30;
@@ -69,17 +70,79 @@ void Graph::generateRandomGraph()
 }
 
 
-int* Graph::findMinimumSolution()
+std::set<int> Graph::findMinimumSolution()
 {
+    int* nodes = new int[this->size];
+    int count = this->size;
+    
+    // Initialize solution list to all zeroes
+    for (int i = 0; i < this->size; i++)
+        nodes[i] = 0;
 
+    // Make an array of the dominating nodes
+    std::set<int> solution;
+    for (int i = 0; i < this->size; i++)
+        if (nodes[i] == 1)
+            solution.insert(i);
 
-    return 0;
+    // Return the array
+    return solution;
 }
 
 
-int* Graph::findApproximateSolution()
+std::set<int> Graph::findApproximateSolution()
 {
-    return 0;
+    int* nodes = new int[this->size];
+    int* neighbors;
+    int currentOutDegree, bestOutDegree = 0;
+    int currentVertex, count=0;
+
+    // Initialize solution list to all zeroes
+    for (int i = 0; i < this->size; i++)
+        nodes[i] = 0;
+
+    // While the graph is not completely dominated
+    bool dominated = false;
+    while(!dominated)
+    {
+        // Find the unused vertex with the highest outdegree
+        for (int i = 0; i < this->size; i++)
+            if (nodes[i] == 0)
+            {
+                for (int j = 0; j < this->size; j++)
+                    if (this->adjacencyMatrix[i][j] == 1 && nodes[j] == 0)
+                        currentOutDegree++;
+                
+                if (currentOutDegree > bestOutDegree)
+                    currentVertex = i;
+            }
+        
+        // Add that vertex to the set
+        nodes[currentVertex] = 1;
+        
+        // For each neighbor of that vertex
+        for (int i = 0; i < this->size; i++)
+            if (this->adjacencyMatrix[currentVertex][i] == 1 && nodes[i] == 0)
+                nodes[i] = 2;
+
+        // Check if the graph is dominated
+        dominated = true;
+        for (int i = 0; i < this->size; i++)
+            if (nodes[i] == 0)
+                dominated = false;
+
+        // Increment the count of vertices used in solution
+        count++;
+    }
+
+    // Make an array of the dominating nodes
+    std::set<int> solution;
+    for (int i = 0; i < this->size; i++)
+        if (nodes[i] == 1)
+            solution.insert(i);
+
+    // Return the array
+    return solution;
 }
 
 

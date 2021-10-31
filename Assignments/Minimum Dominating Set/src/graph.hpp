@@ -9,8 +9,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <vector>
 #include <string>
+#include <set>
 
 class Graph {
 
@@ -33,7 +33,7 @@ class Graph {
          * Finds the miminum dominating set of a graph. Checks all possible combinations
          * of vertices. Expected runtime: 2^n
          */
-        int* findMinimumSolution();
+        std::set<int> findMinimumSolution();
 
         /** 
          * findApproximateSolution()
@@ -42,7 +42,7 @@ class Graph {
          * designed as a greedy algorithm that selects the vertex with the highest
          * out-degree as the next vertex for the dominating set.
          */
-        int* findApproximateSolution();
+        std::set<int> findApproximateSolution();
     
     private:
         int size;

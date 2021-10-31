@@ -14,7 +14,7 @@
 #include <vector>
 #include "graph.hpp"
 
-const int SIZE = 24;
+const int SIZE = 8;
 const float DENSITY = 30;
 
 int main() {
@@ -30,16 +30,16 @@ int main() {
 
     // Find the Minimum Dominating Set
     auto start = std::chrono::steady_clock::now();
-    int* bestSolution = graph.findMinimumSolution();
+    std::set<int> bestSolution = graph.findMinimumSolution();
     auto finish = std::chrono::steady_clock::now();
 
     // Output the minimum set
-    std::cout << "The minimum dominating is: \n{";
-    for (int i = 0; i < SIZE - 1; i++)
+    std::cout << "The minimum dominating is: \n{ ";
+    for (int i : bestSolution)
     {
-        std::cout << std::to_string(bestSolution[i]) << ", ";
+        std::cout << i << ", ";
     }
-    std::cout << std::to_string(bestSolution[SIZE-1]) << "}" << std::endl;
+    std::cout << " }" << std::endl;
 
     // Output the amount of time required
     std::chrono::duration<double> elapsed_seconds = finish-start;
@@ -47,16 +47,16 @@ int main() {
 
     // Find the Approximate Solution
     start = std::chrono::steady_clock::now();
-    int* approximateSolution = graph.findApproximateSolution();
+    std::set<int> approximateSolution = graph.findApproximateSolution();
     finish = std::chrono::steady_clock::now();
 
     // Output the approximate set
-    std::cout << "The approximate solution is: \n{";
-    for (int i = 0; i < SIZE - 1; i++)
+    std::cout << "The approximate solution is: \n{ ";
+    for (int i : approximateSolution)
     {
-        std::cout << std::to_string(approximateSolution[i]) << ", ";
+        std::cout << i << ", ";
     }
-    std::cout << std::to_string(approximateSolution[SIZE-1]) << "}" << std::endl;
+    std::cout << " }" << std::endl;
 
     // Output the amount of time required
     elapsed_seconds = finish-start;
