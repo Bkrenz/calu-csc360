@@ -11,6 +11,7 @@
 
 #include "graph.hpp"
 
+#include <iostream>
 #include <string>
 #include <math.h>
 #include <stdlib.h>
@@ -72,17 +73,62 @@ void Graph::generateRandomGraph()
 
 std::set<int> Graph::findMinimumSolution()
 {
-    int* nodes = new int[this->size];
-    int count = this->size;
-    
-    // Initialize solution list to all zeroes
+    long solutionNumber = 1;
+    int count = 0, bestCount = this->size;
+    int* currentSolution; 
+    int* bestSolution = new int[this->size];
+
+    // Set the nodes list to be empty
     for (int i = 0; i < this->size; i++)
-        nodes[i] = 0;
+        bestSolution[i] = 0;
+
+    // Find the Minimum Dominating Set
+    bool dominated = false;
+    for( ; solutionNumber < pow(2, this->size); solutionNumber++)
+    {
+        // Create an array indicating the current solution
+        currentSolution = new int[this->size];
+        for(int i = 0; i < this->size; i++)
+        {
+            currentSolution[this->size - 1 - i] = (solutionNumber & (1 << i)) > 0 ? 1 : 0;
+        }
+
+        // For each node in the set, check its neighbors
+        for(int i = 0; i < this->size; i++)
+        {
+            if (currentSolution[i] == 1)
+            {
+                count++;
+                for (int j = 0; j < this->size; j++)
+                    if (this->adjacencyMatrix[i][j] == 1 && currentSolution[j] == 0)
+                        currentSolution[j] = 2;
+            }
+        }
+        
+        // Check if the graph is dominated
+        dominated = true;
+        for (int i = 0; i < this->size; i++)
+            if (currentSolution[i] == 0)
+                dominated = false;
+
+        // If the graph is dominated, check if this is a better solution
+        if (count < bestCount && dominated)
+        {
+            bestCount = count;
+            for (int i = 0; i < this->size; i++)
+                bestSolution[i] = currentSolution[i];
+        }
+
+        // Reset vars
+        count = 0;
+        dominated = false;
+        delete [] currentSolution;
+    }
 
     // Make an array of the dominating nodes
     std::set<int> solution;
     for (int i = 0; i < this->size; i++)
-        if (nodes[i] == 1)
+        if (bestSolution[i] == 1)
             solution.insert(i);
 
     // Return the array

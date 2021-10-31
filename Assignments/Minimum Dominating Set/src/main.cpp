@@ -14,7 +14,7 @@
 #include <vector>
 #include "graph.hpp"
 
-const int SIZE = 8;
+const int SIZE = 24;
 const float DENSITY = 30;
 
 int main() {
@@ -34,7 +34,7 @@ int main() {
     auto finish = std::chrono::steady_clock::now();
 
     // Output the minimum set
-    std::cout << "The minimum dominating is: \n{ ";
+    std::cout << "The minimum dominating set is: \n{ ";
     for (int i : bestSolution)
     {
         std::cout << i << ", ";
