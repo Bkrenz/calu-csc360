@@ -27,17 +27,42 @@ int main() {
     Graph graph = Graph(SIZE, DENSITY);
     graph.generateRandomGraph();
 
-    // Find the Min Dominating Set
-    time(&start);           // Start the timer
-    //int* bestSolution = graph.findMinimumSolution();
-    time(&finish);          // Finish the timer
-
     // Print out the graph
     std::cout << graph.toString() << std::endl;
 
-    // Compute the amount of time required
-    std::cout << "Time required = " << difftime(finish, start) << " seconds";
+    // Find the Minimum Dominating Set
+    time(&start);           // Start the timer
+    int* bestSolution = graph.findMinimumSolution();
+    time(&finish);          // Finish the timer
 
+    // Output the minimum set
+    std::cout << "The minimum dominating is: \n{";
+    for (int i = 0; i < SIZE - 1; i++)
+    {
+        std::cout << std::to_string(bestSolution[i]) << ", ";
+    }
+    std::cout << std::to_string(bestSolution[SIZE-1]) << "}" << std::endl;
+
+    // Output the amount of time required
+    std::cout << "Time required: " << difftime(finish, start) << " seconds" << std::endl << std::endl;
+
+    // Find the Approximate Solution
+    time(&start);           // Start the timer
+    int* approximateSolution = graph.findApproximateSolution();
+    time(&finish);          // Finish the timer
+
+    // Output the minimum set
+    std::cout << "The minimum dominating is: \n{";
+    for (int i = 0; i < SIZE - 1; i++)
+    {
+        std::cout << std::to_string(approximateSolution[i]) << ", ";
+    }
+    std::cout << std::to_string(approximateSolution[SIZE-1]) << "}" << std::endl;
+
+    // Output the amount of time required
+    std::cout << "Time required: " << difftime(finish, start) << " seconds" << std::endl;
+
+    // Exit the program
     return 0;
 
 }

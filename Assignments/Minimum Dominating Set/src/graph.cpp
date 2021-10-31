@@ -77,6 +77,7 @@ int* Graph::findApproximateSolution()
     return 0;
 }
 
+
 std::string Graph::toString()
 {
     std::string output = "";
