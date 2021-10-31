@@ -23,8 +23,8 @@ class Graph {
 
         void generateRandomGraph();
 
-        int findMinimumSolution();
-        int findApproximateSolution();
+        int* findMinimumSolution();
+        int* findApproximateSolution();
     
     private:
         int size;

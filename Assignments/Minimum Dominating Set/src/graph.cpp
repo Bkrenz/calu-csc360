@@ -66,15 +66,37 @@ void Graph::generateRandomGraph()
 }
 
 
-int Graph::findMinimumSolution()
+int* Graph::findMinimumSolution()
 {
     return 0;
 }
 
 
-int Graph::findApproximateSolution()
+int* Graph::findApproximateSolution()
 {
     return 0;
+}
+
+std::string Graph::toString()
+{
+    std::string output = "";
+
+    // Graph Size and Density
+    output += "Size: " + std::to_string(this->size) + " \n";
+    output += "Density: "  + std::to_string(this->density) + "\n";
+    output += "\n";
+
+    // Print out the adjacency Matrix
+    output += "Adjacency Matrix:\n";
+    for (int i = 0; i < this->size; i++)
+    {
+        for(int j = 0; j < this->size; j++)
+            output += std::to_string(this->adjacencyMatrix[i][j]) + " ";
+        output+= "\n";
+    }
+    output += "\n";
+
+    return output;
 }
 
 #endif

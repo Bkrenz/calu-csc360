@@ -29,11 +29,11 @@ int main() {
 
     // Find the Min Dominating Set
     time(&start);           // Start the timer
-    int bestSolution = graph.findMinimumSolution();
+    //int* bestSolution = graph.findMinimumSolution();
     time(&finish);          // Finish the timer
 
-    // Print out the vector
-    std::cout << "Best Solution = " << bestSolution << std::endl;
+    // Print out the graph
+    std::cout << graph.toString() << std::endl;
 
     // Compute the amount of time required
     std::cout << "Time required = " << difftime(finish, start) << " seconds";
