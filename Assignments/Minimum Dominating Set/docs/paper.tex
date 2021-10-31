@@ -7,9 +7,8 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{tabularx}
+
 \usepackage{multicol}
-\usepackage{algpseudocode}
-\usepackage{algorithm}
 \usepackage{subfiles}
 
 % Geometry 
@@ -23,18 +22,17 @@
 \usepackage{setspace}
 \doublespacing 
 
-% Macros
-\newcommand{\definition}[1]{\underline{\textbf{#1}}}
-
-\newenvironment{rcases}
-  {\left.\begin{aligned}}
-  {\end{aligned}\right\rbrace}
+% Add space between columns
+\setlength\columnsep{20pt}
 
 % Begin Document
 \begin{document}
 
 \maketitle
 
-\subfile{tex/introduction.tex}
+\begin{multicols*}{2}
+  \subfile{tex/introduction.tex}
+  \subfile{tex/background.tex}
+\end{multicols*}
 
 \end{document}

@@ -9,7 +9,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ctime>
-#include <time.h>
+#include <chrono>
 #include <math.h>
 #include <vector>
 #include "graph.hpp"
@@ -21,7 +21,6 @@ int main() {
 
     // Init
     srand(time(NULL));
-    time_t start, finish;
 
     // Create an Undirected Graph
     Graph graph = Graph(SIZE, DENSITY);
@@ -30,9 +29,9 @@ int main() {
     std::cout << graph.toString() << std::endl;
 
     // Find the Minimum Dominating Set
-    time(&start);           // Start the timer
+    auto start = std::chrono::steady_clock::now();
     int* bestSolution = graph.findMinimumSolution();
-    time(&finish);          // Finish the timer
+    auto finish = std::chrono::steady_clock::now();
 
     // Output the minimum set
     std::cout << "The minimum dominating is: \n{";
@@ -43,12 +42,13 @@ int main() {
     std::cout << std::to_string(bestSolution[SIZE-1]) << "}" << std::endl;
 
     // Output the amount of time required
-    std::cout << "Time required: " << difftime(finish, start) << " seconds" << std::endl << std::endl;
+    std::chrono::duration<double> elapsed_seconds = finish-start;
+    std::cout << "Time required: " << elapsed_seconds.count() << " seconds" << std::endl << std::endl;
 
     // Find the Approximate Solution
-    time(&start);           // Start the timer
+    start = std::chrono::steady_clock::now();
     int* approximateSolution = graph.findApproximateSolution();
-    time(&finish);          // Finish the timer
+    finish = std::chrono::steady_clock::now();
 
     // Output the approximate set
     std::cout << "The approximate solution is: \n{";
@@ -59,7 +59,8 @@ int main() {
     std::cout << std::to_string(approximateSolution[SIZE-1]) << "}" << std::endl;
 
     // Output the amount of time required
-    std::cout << "Time required: " << difftime(finish, start) << " seconds" << std::endl;
+    elapsed_seconds = finish-start;
+    std::cout << "Time required: " << elapsed_seconds.count() << " seconds" << std::endl;
 
     // Exit the program
     return 0;
