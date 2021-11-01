@@ -28,7 +28,7 @@
 #include "graph.hpp"
 
 // Default values
-const int MAX_SIZE = 24;        // The amount of vertices in the graph
+const int MAX_SIZE = 36;        // The amount of vertices in the graph
 const float DENSITY = 30;       // The density percentage of the graph
 const float ITERATIONS = 1;     // The amount of iterations to run
 
@@ -53,6 +53,7 @@ int main(int argc, char **argv) {
     {
         size = atoi(argv[1]);
         maxSize = atoi(argv[2]);
+        std::cout << argv[2];
         iterations = atoi(argv[3]);
     }
     else if (argc > 1)
