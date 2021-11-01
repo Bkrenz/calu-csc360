@@ -15,7 +15,6 @@
 class Graph {
 
     public:
-        Graph();
         Graph(const int pSize, const int pDensity);
         ~Graph();
 

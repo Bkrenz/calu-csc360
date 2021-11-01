@@ -17,18 +17,6 @@
 #include <stdlib.h>
 #include <set>
 
-const int SIZE = 16;
-const int DENSITY = 30;
-
-
-Graph::Graph()
-{
-    this->size = SIZE;
-    this->density = DENSITY;
-    this->generateRandomGraph();
-}
-
-
 Graph::Graph(const int pSize, const int pDensity)
 {
     this->size = pSize;
