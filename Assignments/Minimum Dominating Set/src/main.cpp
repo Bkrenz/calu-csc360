@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
         redirectOut = false;
 
     // Iterate the Algorithm multiple times
-    for(; size <= MAX_SIZE; size++)
+    for(; size <= maxSize; size++)
     {
         if (redirectOut)
         {
