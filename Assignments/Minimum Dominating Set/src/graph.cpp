@@ -61,7 +61,7 @@ void Graph::generateRandomGraph()
 
 std::set<int> Graph::findMinimumSolution()
 {
-    long solutionNumber = 1;
+    long solutionNumber = 1, p = pow(2, this->size);
     int count = 0, bestCount = this->size;
     int* currentSolution; 
     int* bestSolution = new int[this->size];
@@ -72,7 +72,7 @@ std::set<int> Graph::findMinimumSolution()
 
     // Find the Minimum Dominating Set
     bool dominated = false;
-    for( ; solutionNumber < pow(2, this->size); solutionNumber++)
+    for( ; solutionNumber < p; solutionNumber++)
     {
         // Create an array indicating the current solution
         currentSolution = new int[this->size];

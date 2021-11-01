@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
         }
 
         // Print out the graph size
-        std::cout << "# of Vectors: " << size << std::endl;
+        std::cout << "# of Vertices: " << size << std::endl;
         
         // Run the algorithm
         for(int x = 1; x <= iterations; x++)
