@@ -20,6 +20,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include <stdlib.h>
 #include <ctime>
 #include <chrono>
@@ -28,9 +29,9 @@
 #include "graph.hpp"
 
 // Default values
-const int MAX_SIZE = 36;        // The amount of vertices in the graph
+const int MAX_SIZE = 20;        // The amount of vertices in the graph
 const float DENSITY = 30;       // The density percentage of the graph
-const float ITERATIONS = 1;     // The amount of iterations to run
+const float ITERATIONS = 5;     // The amount of iterations to run
 
 int main(int argc, char **argv) {
 
@@ -53,7 +54,6 @@ int main(int argc, char **argv) {
     {
         size = atoi(argv[1]);
         maxSize = atoi(argv[2]);
-        std::cout << argv[2];
         iterations = atoi(argv[3]);
     }
     else if (argc > 1)
@@ -63,30 +63,38 @@ int main(int argc, char **argv) {
     }
     else 
         redirectOut = false;
+    
+    if (redirectOut)
+    {
+        // Redirect cout to the appropriate file
+        fileName = "min-dominating-set.txt";
+        out.open(fileName);
+        std::cout.rdbuf(out.rdbuf());
+    }
+
+    // Setup the table headings
+    std::cout << "Graph Density: " << DENSITY << "%" << std::endl;
+    std::cout << std::left;
+    std::cout << std::setw(12) << "Verts"; 
+    std::cout << std::setw(12) << "Min Size";
+    std::cout << std::setw(12) << "Min Time";
+    std::cout << std::setw(12) << "App Size";
+    std::cout << std::setw(12) << "App Time";
+    std::cout << std::endl << std::endl;
 
     // Iterate the Algorithm multiple times
     for(; size <= maxSize; size++)
     {
-        if (redirectOut)
-        {
-            // Redirect cout to the appropriate file
-            fileName = "graph-size-" + std::to_string(size) + ".txt";
-            out.open(fileName);
-            std::cout.rdbuf(out.rdbuf());
-        }
-
-        // Print out the graph size
-        std::cout << "# of Vertices: " << size << std::endl;
         
         // Run the algorithm
         for(int x = 1; x <= iterations; x++)
         {
 
+            // Print out the graph size
+            std::cout << std::setw(12) << size;
+
             // Create an Undirected Graph
             Graph graph = Graph(size, DENSITY);
-
-            // Output the iteration count
-            std::cout << "Iteration " << x << ": " << std::endl;
 
             // Find the Minimum Dominating Set
             auto start = std::chrono::steady_clock::now();
@@ -94,16 +102,9 @@ int main(int argc, char **argv) {
             auto finish = std::chrono::steady_clock::now();
 
             // Output the minimum set
-            std::cout << "The minimum dominating set is: { ";
-            for (int i : bestSolution)
-            {
-                std::cout << i << ", ";
-            }
-            std::cout << "}. ";
-
-            // Output the amount of time required
+            std::cout << std::setw(12) << bestSolution.size();
             elapsed_seconds = finish-start;
-            std::cout << "Time required: " << elapsed_seconds.count() << " seconds" << std::endl;
+            std::cout << std::setw(12) << elapsed_seconds.count();
 
             // Find the Approximate Solution
             start = std::chrono::steady_clock::now();
@@ -111,21 +112,18 @@ int main(int argc, char **argv) {
             finish = std::chrono::steady_clock::now();
 
             // Output the approximate set
-            std::cout << "The approximate solution is: { ";
-            for (int i : approximateSolution)
-            {
-                std::cout << i << ", ";
-            }
-            std::cout << "}. ";
-
-            // Output the amount of time required
+            std::cout << std::setw(12) << approximateSolution.size();
             elapsed_seconds = finish-start;
-            std::cout << "Time required: " << elapsed_seconds.count() << " seconds" << std::endl << std::endl;
+            std::cout << std::setw(12) << elapsed_seconds.count();
+        
+            std::cout << std::endl;
         }
 
-        // Close the file
-        out.close();
     }
+
+    // Close the file
+    if(redirectOut)
+        out.close();
 
     // Exit the program
     return 0;

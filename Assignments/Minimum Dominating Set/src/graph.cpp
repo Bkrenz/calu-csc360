@@ -107,7 +107,6 @@ std::set<int> Graph::findMinimumSolution()
                 bestSolution[i] = currentSolution[i];
         }
 
-
         // Reset vars
         count = 0;
         dominated = false;
