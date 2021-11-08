@@ -19,10 +19,13 @@
 In this paper, we explore the Minimum Dominating Set of a Graph and how to find it.
 The Minimum Domianting Set of a Graph is the Set of all nodes such that every node or one of its neighbors is in the set.
 
-There are two basic algorithms for finding a minimum set.
-The first algorithm uses a brute force approach, checking every possible set of vertices.
-The second algorithm uses a greedy approach, using the first available vertex with the highest out-degree.
-The greedy approach does not guarantee a minimum set.
+This is in demonstration of the time complexity of algorithms, often denoted using Big-O notation ($O(n)$).
+To date, the best known algorithms used to guarantee the minimum dominating set run in exponential scales, of the form $O(2^n)$.
+Solutions however are able to be verified in polynomial time, of the form $O(n^2)$.
+There are several algorithms used to get an approximate answer that run in much smaller scales.
+
+In this paper, we explore the algorithm used to find the Minimum Domating Set.
+We also explore an approximating algorithm in order to compare the efficacy of the two, with accuracy and runtime being the major criteria.
 
 This paper is divided into the following sections. 
 Section 2 contains background information on the Minimum Dominating Set.
