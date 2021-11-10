@@ -1,0 +1,40 @@
+\documentclass[paper.tex]{subfiles}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Begin Document
+\begin{document}
+
+\section{Conclusion}
+
+This paper has explored two approaches to finding the Minimum Domating Set of a graph, a brute force approach and an approximation approach.
+This problem is an $NP-Complete$ problem.
+This follows from two facts about the problem.
+First, the best known solution is a brute force approach, checking every possible solution.
+Second, the solution is verifiable in polynomial time.
+
+The brute force approach checks every possible combination of nodes of the graph to find a minimal covering.
+Thus, for a graph with $n$ nodes, the amount of possible combinations is $2^n$, indicating a runtime complexity of $O(2^n)$.
+Our experimental data shows that a modest 37-node graph can take nearly 45 hours to run.
+This does come with the guarantee of finding the minimal solution.
+
+The approximation approach is much faster however. 
+Utilizing a naive greedy approach, a 37-node graph was near instantaneous for a solution.
+For all experimental data, the approximate solution ran orders of magnitude faster than the brute force approach.
+The implemented approach ran with a time complexity of $O(n^2)$, much better than the brute force approach.
+However, this comes with a major trade-off. 
+The approximation algorithm rarely finds a minimal solution, with approximate solutions often being double the size of the found minimal solution.
+
+Whether the brute force approach or the approximate approach is the proper choice is domain specific.
+Each project will thus need to weigh its factors in determining if an approximate solution is of sufficient quality when applying these techniques.
+
+\end{document}

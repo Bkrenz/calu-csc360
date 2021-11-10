@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \title{Minimum Dominating Set of a Graph}
-\author{Robert Krency, Regina Thase, Frank Bedekovich}
+\author{Frank Bedekovich, Robert Krency, Regina Thase}
 
 \usepackage{tikz}
 \usepackage{amsmath}
@@ -10,6 +10,11 @@
 
 \usepackage{multicol}
 \usepackage{subfiles}
+
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+\usepackage{pgfplots}
 
 % Geometry 
 \usepackage{geometry}
@@ -20,7 +25,7 @@
 
 % Use Double Spacing for the paper
 \usepackage{setspace}
-\doublespacing
+\onehalfspacing
 
 % Add space between columns
 \setlength\columnsep{30pt}
@@ -36,10 +41,11 @@
 
 \pagebreak
 
-\begin{multicols*}{2}
-  \subfile{tex/introduction.tex}
-  \subfile{tex/background.tex}
-\end{multicols*}
-
+\subfile{tex/introduction.tex}
+\subfile{tex/background.tex}
+\subfile{tex/bruteforce.tex}
+\subfile{tex/approximation.tex}
+\subfile{tex/experimentdata.tex}
+\subfile{tex/conclusion.tex}
 
 \end{document}

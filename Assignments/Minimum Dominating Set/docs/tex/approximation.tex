@@ -1,0 +1,55 @@
+\documentclass[paper.tex]{subfiles}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Begin Document
+\begin{document}
+
+\section{Approximation Approach}
+
+As the Minimum Domating Set requires a brute force approach, sufficiently large graphs can have enormous run times.
+To counter these problems, approximation algorithms are developed.
+These are designed to find an answer that is often considered good enough for the task at hand, while having a much lower complexity.
+
+We explored one such approach.
+This approach uses a greedy technique for finding a dominating set.
+While the set is not covered, it selects the node with the highest out-degree of nodes that are not yet dominated.
+This node gets added to the current list of dominating nodes, and repeats until the entire graph is covered.
+This greatly improves our runtime complexity to $O(n^2)$.
+
+To put this concept into pseudocode:
+
+\begin{algorithm}[H]
+
+    \caption{Minimum Dominating Set approximation algorithm}
+
+    \begin{algorithmic}[1]
+        \Procedure{Approximate Dominating Set}{}
+            \While{the graph is not dominated}
+                \For{each node not yet domianted}
+                    \State Find its out-degree of nodes not yet dominated
+                \EndFor
+                \State Get the node with the highest out-degree
+                \State Set all of its neighbors to be dominated
+            \EndWhile
+        \EndProcedure
+    \end{algorithmic}
+
+\end{algorithm}
+
+As evident, this algorithm is much simpler.
+However, there is no guarantee that this algorithm will produce a minimal set, or even a set that is close to minimal.
+Depending on the task at hand, this approximate solution using a greedy technique may be preferred to a guaranteed minimal set.
+
+We show some results of our experimental data in the next section.
+
+\end{document}

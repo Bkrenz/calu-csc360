@@ -1,0 +1,65 @@
+\documentclass[paper.tex]{subfiles}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Begin Document
+\begin{document}
+
+\section{Brute Force Approach}
+
+Calculating the Minimum Domating Set of a graph is a difficult problem.
+The size and complexity of a graph quickly grows with the number of nodes, $n$, and the number of edges, $e$, that make up the graph.
+As such, the only known way to guarantee finding the minimum dominating set is through a brute force approach.
+
+This entails checking every possible combination of nodes in the graph.
+For each combination, the algorithm would check if it dominates every node in the graph, and if it is then checks if it's smaller than the currently known smallest dominating set.
+After all combinations are checked, the smallest known set is then guaranteed to be the Minimum Dominating Set.
+
+To put this concept into pseudocode:
+
+\begin{algorithm}[H]
+
+    \caption{Minimum Dominating Set brute force algorithm}
+
+    \begin{algorithmic}[1]
+        \Procedure{Minimum Dominating Set}{}
+            \State $i \gets 1$
+            \While{$i < 2^n$}
+                \State{Convert $i$ into a binary array, $binArray$}
+                \State{Create an array of $0s$ for the dominated nodes, $domArray$}
+                \For{each $1 \in binArray$}
+                    \State{Get the node at that index from the graph}
+                    \For{each neighbor of the node}
+                        \State{Set it to dominated in $domArray$}
+                    \EndFor
+                \EndFor
+                \If{all nodes dominated}
+                    \If{Current Solution Size $<$ Best Solution Size}
+                        \State{$bestSolution \gets i$}
+                    \EndIf
+                \EndIf
+                \State{Increment $i$}
+            \EndWhile
+        \EndProcedure
+
+    \end{algorithmic}
+
+\end{algorithm}
+
+As this is a brute force algorithm, the amount of iterations needed is strictly dependent on the size of the graph.
+We can represent each solution as a set of bits, such that any index with a $1$ indicates that node is a part of the dominating set.
+The number of possible solutions is therefore $2^n$, resulting in a runtime complexity of $O(2^n)$.
+The amount of iterations quickly scales up, crossing the one billion mark for a graph of size 30.
+This indicates that any sufficiently large graphs are essentially outside the limits of brute force computing.
+We later cover experimental data that shows this.
+
+\end{document}
