@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\section*{Notes Week 13}
+
+\subsection*{Ford-Fulkerson Method for solving Network Flow}
+
+\begin{itemize}
+
+    \item Weighted, directed graphs
+
+    \item We view a weight as the capacity - ie, how much data can flow on that edge
+
+    \item Consider the following graph:
+
+\end{itemize}
+
+% insert graph
+\begin{figure}[h]
+\begin{center}
+  \begin{tikzpicture}
+  
+      \begin{scope}[every node/.style={circle,thick,draw}]
+          \node (1) at (0,3) {A};
+          \node (2) at (6,3) {B};
+          \node (3) at (0,0) {C};
+          \node (4) at (6,0) {D};
+          \node (6) at (-3,1.5) {Input};
+          \node (7) at (9, 1.5) {Output};
+      \end{scope}
+  
+      \begin{scope}[every node/.style={fill=white,circle}, every edge/.style={draw=red,very thick}]
+          \path [->] (6) edge node {$16$} (1);
+          \path [->] (6) edge node {$13$}  (3);
+          \path [->] (1) edge node {$x_1$} (3);
+          \path [->] (1) edge node {$x_1$} (2);
+          \path [->] (1) edge node {$x_2$} (5);
+          \path [->] (3) edge node {$x_3$} (5);
+          \path [->] (3) edge node {$x_5$} (4);
+          \path [->] (2) edge node {$x_5$} (5);
+          \path [->] (5) edge node {$7$} (4);
+          \path [->] (4) edge node {$x_2$} (2);
+          \path [->] (2) edge node {$x_3$} (20);
+          \path [->] (4) edge node {$120$} (4);
+      \end{scope}
+  
+  \end{tikzpicture}
+  
+  \caption{The Network Graph}
+\end{center}
+\end{figure}
+    
+\begin{itemize}
+
+    \item The question is, can we get a full flow to the output?
+
+\end{itemize}
+
+\end{document}
