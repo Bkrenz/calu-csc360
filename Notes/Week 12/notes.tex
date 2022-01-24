@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+
+% Geometry 
+\usepackage{geometry}
+\geometry{letterpaper, left=15mm, top=20mm, right=15mm, bottom=20mm}
+
+% Fancy Header
+\usepackage{fancyhdr}
+\renewcommand{\footrulewidth}{0.4pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{CSC 360 - Analysis of Algorithms}
+\lfoot{CALU Fall 2021}
+\rfoot{RDK}
+
+% Add vertical spacing to tables
+\renewcommand{\arraystretch}{1.4}
+
+% Macros
+\newcommand{\definition}[1]{\underline{\textbf{#1}}}
+
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+% Begin Document
+\begin{document}
+
+\section*{Notes Week 12}
+
+\subsection*{Minimum Spanning Trees}
+
+\begin{itemize}
+
+    \item spanning tree - $(V, T \subseteq E)$ - a connected, acylic subgraph containing all the vertices
+    \begin{itemize}
+      \item There are $V - 1$ edges (Weight of ST is the sum of all edge weights in T)
+      \item A minimum spanning tree exists if and only if G is connected
+      \item Greed is sometimes a good thing!
+    \end{itemize}
+
+    \item We will explore two greedy algorithms for finding a minimum spanning tree
+    \begin{itemize}
+      \item Kruskal (forest) - don't necessarily have a connected subtree until the end
+      \begin{itemize}
+        \item Sort edges first
+        \item Start adding edges (don't create a cycle)
+        \item Repeat step b until you have a spanning tree
+      \end{itemize}
+
+      \item Prim's (tree) - always have a connected subtree (we will see, this one is best)
+      \begin{itemize}
+        \item Start with any root
+        \item Choose smallest weight edge coming out of it
+        \item Choose smallest weight edge coming out of any connected vertex (don't create a cycle)
+        \item Repeat step c until you have a spanning tree
+      \end{itemize}
+    \end{itemize}
+
+\end{itemize}
+
+\pagebreak
+
+% TODO: Insert the graphs here
+
+\pagebreak
+
+\subsection*{Kruskal's Algorithm}
+
+\begin{algorithm}
+
+  \caption{Kruskal's Algorithm}
+
+  \begin{algorithmic}
+
+    \Procedure{Kruskal}{}
+
+    \State $A \gets \emptyset$
+    
+    \For{each vertex $v \in G$}
+      \State{$make_set(v)$}
+    \EndFor
+
+    \State{Sort edges of G in increasing order of weight}
+
+    \For{each edge $(u,v)$}
+      \If{$Find_Set(u) \neq Find_Set(v)$}
+        \State{$A \gets A \cup \{(u,v)\}$}
+        \State{$union(u,v)$}
+      \EndIf
+    \EndFor
+
+    \EndProcedure
+
+  \end{algorithmic}
+
+\end{algorithm}
+
+\begin{itemize}
+  \item The sort takes the longest, so the running time is $O(E log(E))$
+  \item Note that $E = O(V^2)$ - A compelte graph has $\frac{n(n-1)}{2}$ edges
+  \item If two vertices are in the same set, and are connected, adding an edge between them would create a cycle
+  \item A union operation joins two sets into one (adding an edge merges two trees into one)
+  \item This is a greedy algorithm
+  \item Find Set(u) runs in \textbf{Constant Time} - maintain, for each vertex, a pointer to the set it belongs to
+  \item Union(u,v) runs in \textbf{Constant Time} - implement as linked lists, attach one to the end of another
+\end{itemize}
+
+\pagebreak
+
+\subsection*{Prim's Algorithm}
+
+% Insert the Algorithm here
+
+\begin{itemize}
+  \item First for-loop takes $O(V)$
+  \item The while-loop runs $V$ times
+  \item The dequeue statement takes $O(log(V))$, yielding $O(V log(V))$ since it is inside of the while-loop
+  \item The for-loop inside of the while-loop can be simplified by noticing each edge can be processed once, with the heapify taking $O(log(V))$, yielding $O(E log(V))$
+  \item Since $O(E log(V))$ dominates $O(V log(V))$, the final analysis is $O(E log(V))$
+  \item This is also a greedy algorithm
+  \item This is slightly better than Kruskal's
+\end{itemize}
+
+
+
+
+
+\end{document}
